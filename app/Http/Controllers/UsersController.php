@@ -25,9 +25,13 @@ class UsersController extends Controller
     }
 
     /**
-     * 编辑个人信息页面
+     * [edit description] 编辑个人信息页面
+     * @Author: panninan
+     * @Date: 2019/3/17
+     * @Time: 23:02
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(User $user)
     {
@@ -35,6 +39,14 @@ class UsersController extends Controller
         return view('users.edit', compact('user'));
     }
 
+    /**
+     * 更新个人信息
+     * @param UserRequest $request
+     * @param ImageUploadHandler $imgHandler
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(UserRequest $request, ImageUploadHandler $imgHandler, User $user)
     {
         $this->authorize('update', $user);
